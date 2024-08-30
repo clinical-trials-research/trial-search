@@ -1,10 +1,19 @@
 services:
   trial-search-chromadb:
     image: chromadb/chroma
+    container_name: trial-search-chromadb
     volumes:
       - chroma-data:/chroma/chroma
     ports:
       - 8000:8000
+
+  trial-search-backend:
+    container_name: trial-search-backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - 8001:8001
 
 volumes:
   chroma-data:
