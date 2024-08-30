@@ -5,7 +5,7 @@ from flask import Flask, request
 app = Flask(__name__)
 
 # Hosting locally for now.
-chroma_client = chromadb.HttpClient(host="localhost", port=8000)
+chroma_client = chromadb.HttpClient(host="trial-search-chromadb", port=8000)
 chroma_collection = chroma_client.get_or_create_collection(
     name="trials",
     embedding_function=SentenceTransformerEmbeddingFunction(
