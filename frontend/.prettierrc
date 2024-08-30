@@ -3,15 +3,8 @@
   "useTabs": false,
   "trailingComma": "all",
   "arrowParens": "avoid",
-  "importOrder": [
-    "^@core/(.*)$",
-    "^@server/(.*)$",
-    "^@ui/(.*)$",
-    "^[./]"
-  ],
-  "importOrderSeparation": true,
-  "importOrderSortSpecifiers": true,
   "tailwindConfig": "./tailwind.config.js",
+  "organizeImportsSkipDestructiveCodeActions": true,
   "plugins": [
     "prettier-plugin-tailwindcss",
     "prettier-plugin-organize-imports"
