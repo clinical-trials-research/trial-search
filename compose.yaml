@@ -1,5 +1,5 @@
 services:
-  trial-search-chromadb:
+  chromadb:
     image: chromadb/chroma
     container_name: trial-search-chromadb
     volumes:
@@ -7,7 +7,7 @@ services:
     ports:
       - 8000:8000
 
-  trial-search-backend:
+  backend:
     container_name: trial-search-backend
     build:
       context: ./backend
