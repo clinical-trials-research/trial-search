@@ -23,4 +23,4 @@ ENV VIRTUAL_ENV=/app/.venv \
 COPY --from=builder ${VIRTUAL_ENV} ${VIRTUAL_ENV}
 COPY app.py .
 
-CMD ["poetry", "run", "gunicorn", "-b", "0.0.0.0:8001", "app:app"]
+CMD ["gunicorn", "-b", "0.0.0.0:8001", "app:app"]
