@@ -6,7 +6,7 @@ export default function SearchPage() {
   let [trials, setTrials] = useState([]);
 
   async function updateSearchResults(queryText) {
-    let response = await fetch("http://localhost:8001/query", {
+    let response = await fetch("http://localhost:8001/api/query", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ query: queryText }),
