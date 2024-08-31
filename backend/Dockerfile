@@ -13,6 +13,8 @@ COPY pyproject.toml poetry.lock ./
 RUN poetry install --without dev && rm -rf $POETRY_CACHE_DIR
 
 
+# Multistage build to save space - we don't need poetry, just our virtual
+# environment.
 FROM python:3.11-slim AS runtime
 
 ENV VIRTUAL_ENV=/app/.venv \
