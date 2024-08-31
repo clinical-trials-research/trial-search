@@ -8,6 +8,10 @@
 
 ## Usage
 
+Run all Docker containers:
+
 ```bash
 docker compose up
 ```
+
+Visit website at <http://localhost:80>.
