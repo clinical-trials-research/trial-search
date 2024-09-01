@@ -16,7 +16,7 @@ chroma_collection = chroma_client.get_or_create_collection(
 )
 
 
-def studies_generator(num_studies=100) -> Generator:
+def studies_generator(num_studies=1000) -> Generator:
     """
     Create a generator that yields batches of clinical trials. The number
     of trials is specified in the constructor as num_studies.
