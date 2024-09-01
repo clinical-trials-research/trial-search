@@ -4,9 +4,10 @@ import Trial from "../components/Trial";
 export default function SearchPage() {
   let [queryText, setQueryText] = useState("");
   let [trials, setTrials] = useState([]);
-  let [loading, setLoading] = useState(true);
+  let [loading, setLoading] = useState(false);
 
   async function updateSearchResults(queryText) {
+    setLoading(true);
     let response = await fetch("http://localhost:8001/api/query", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -24,6 +25,7 @@ export default function SearchPage() {
       newTrials.push({ nctid: ids[i], document: documents[i] });
     }
     setTrials(newTrials);
+    setLoading(false);
   }
 
   return (
@@ -42,6 +44,7 @@ export default function SearchPage() {
           Search
         </button>
       </div>
+      {loading && <p>Loading...</p>}
       {trials.map(({ nctid, document }, index) => (
         <Trial key={index} nctid={nctid} document={document} />
       ))}
