@@ -4,6 +4,7 @@ import Trial from "../components/Trial";
 export default function SearchPage() {
   let [queryText, setQueryText] = useState("");
   let [trials, setTrials] = useState([]);
+  let [loading, setLoading] = useState(true);
 
   async function updateSearchResults(queryText) {
     let response = await fetch("http://localhost:8001/api/query", {
