@@ -38,7 +38,7 @@ export default function SearchPage() {
           onInput={e => setQueryText(e.target.value)}
         />
         <button
-          className="rounded bg-slate-300 p-2"
+          className="rounded bg-slate-300 p-2 transition duration-100 hover:bg-slate-400"
           onClick={() => updateSearchResults(queryText)}
         >
           Search
