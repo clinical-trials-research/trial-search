@@ -14,4 +14,4 @@ Run all Docker containers:
 docker compose up
 ```
 
-Visit website at <http://localhost:80>.
+Visit website at <http://localhost>.
