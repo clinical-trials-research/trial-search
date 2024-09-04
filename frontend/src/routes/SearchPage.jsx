@@ -6,12 +6,12 @@ export default function SearchPage() {
   let [trials, setTrials] = useState([]);
   let [loading, setLoading] = useState(false);
 
-  async function handleSearch(query) {
+  async function handleSearch(query, neighbors) {
     setLoading(true);
     let response = await fetch("http://localhost:8001/api/query", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ query: query }),
+      body: JSON.stringify({ query, neighbors }),
     });
     let { ids, documents } = await response.json();
 
