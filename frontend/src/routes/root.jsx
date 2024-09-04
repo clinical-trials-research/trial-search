@@ -7,8 +7,8 @@ import { Outlet } from "react-router-dom";
  */
 export default function Root() {
   return (
-    <div className="min-h-screen bg-slate-50 font-serif p-5">
-      <h1 className="text-4xl">Trial Search</h1>
+    <div className="min-h-screen bg-zinc-100 p-5 font-serif">
+      <h1 className="mx-10 my-5 text-3xl">Trial Search</h1>
       <Outlet />
     </div>
   );

@@ -1,17 +1,17 @@
 import { useState } from "react";
+import SearchBar from "../components/SearchBar";
 import Trial from "../components/Trial";
 
 export default function SearchPage() {
-  let [queryText, setQueryText] = useState("");
   let [trials, setTrials] = useState([]);
   let [loading, setLoading] = useState(false);
 
-  async function updateSearchResults(queryText) {
+  async function handleSearch(query) {
     setLoading(true);
     let response = await fetch("http://localhost:8001/api/query", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ query: queryText }),
+      body: JSON.stringify({ query: query }),
     });
     let { ids, documents } = await response.json();
 
@@ -24,30 +24,21 @@ export default function SearchPage() {
     for (let i = 0; i < ids.length; i++) {
       newTrials.push({ nctid: ids[i], document: documents[i] });
     }
+
     setTrials(newTrials);
     setLoading(false);
   }
 
   return (
     <div>
-      <div className="my-6">
-        <input
-          className="mr-2 rounded border-2 border-slate-400 p-1"
-          type="text"
-          value={queryText}
-          onInput={e => setQueryText(e.target.value)}
-        />
-        <button
-          className="rounded bg-slate-300 p-2 transition duration-100 hover:bg-slate-400"
-          onClick={() => updateSearchResults(queryText)}
-        >
-          Search
-        </button>
+      <SearchBar handleSearch={handleSearch} />
+
+      <div className="flex flex-col items-center">
+        {loading && <p>Loading...</p>}
+        {trials.map(({ nctid, document }, index) => (
+          <Trial key={index} nctid={nctid} document={document} />
+        ))}
       </div>
-      {loading && <p>Loading...</p>}
-      {trials.map(({ nctid, document }, index) => (
-        <Trial key={index} nctid={nctid} document={document} />
-      ))}
     </div>
   );
 }
