@@ -26,5 +26,6 @@ chroma_collection = chroma_client.get_or_create_collection(
 
 @app.route("/api/query", methods=["POST"])
 def query():
-    query_text = request.json.get("query")
-    return chroma_collection.query(query_texts=query_text)
+    query = request.json.get("query")
+    neighbors = request.json.get("neighbors")
+    return chroma_collection.query(query_texts=query, n_results=neighbors)
