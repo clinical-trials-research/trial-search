@@ -11,7 +11,9 @@ export default function Root() {
           <h1 className="text-3xl">Trial Search</h1>
         </Link>
         <ul>
-          <Link to={"/about"}>About</Link>
+          <Link className="hover:underline" to={"/about"}>
+            About
+          </Link>
         </ul>
       </div>
       <Outlet />
