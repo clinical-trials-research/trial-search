@@ -2,6 +2,9 @@ import { useState } from "react";
 import SearchBar from "../components/SearchBar";
 import Trial from "../components/Trial";
 
+/**
+ * Represents the main page where users can search and display clinical trials.
+ */
 export default function SearchPage() {
   let [trials, setTrials] = useState([]);
   let [loading, setLoading] = useState(false);

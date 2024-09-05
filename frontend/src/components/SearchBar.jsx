@@ -1,5 +1,8 @@
 import { useState } from "react";
 
+/**
+ * SearchBar is a component which is used to search for clinical trials.
+ */
 export default function SearchBar({ handleSearch }) {
   let [query, setQuery] = useState("");
   let [neighbors, setNeighbors] = useState(10);
