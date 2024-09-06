@@ -1,7 +1,7 @@
 /**
  * The about page gives information about the website.
  */
-export default function About() {
+export default function AboutPage() {
   return (
     <div className="w-11/12 rounded-3xl bg-gray-50 p-5 md:w-8/12 lg:w-5/12">
       <p>
