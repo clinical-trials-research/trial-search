@@ -10,7 +10,7 @@ ENV POETRY_NO_INTERACTION=1 \
 WORKDIR /app
 
 COPY pyproject.toml poetry.lock ./
-RUN poetry install
+RUN poetry install --without dev && rm -rf $POETRY_CACHE_DIR
 
 
 # Multistage build to save space - we don't need poetry, just our virtual
