@@ -4,12 +4,9 @@ RUN mkdir -p /app/node_modules && chown -R node:node /app
 
 WORKDIR /app
 
-USER node
-
-COPY --chown=node:node package*.json ./
-RUN npm ci
-
 COPY . .
+
+RUN npm install
 RUN npm run build
 
 FROM nginx:1.27.1-alpine 
