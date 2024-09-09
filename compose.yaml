@@ -12,8 +12,6 @@ services:
       dockerfile: Dockerfile
     ports:
       - 8001:8001
-    depends_on:
-      - chromadb
 
   frontend:
     build:
@@ -21,8 +19,6 @@ services:
       dockerfile: Dockerfile
     ports:
       - 80:80
-    depends_on:
-      - backend
 
 volumes:
   chroma-data:
