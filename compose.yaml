@@ -1,5 +1,6 @@
 services:
   backend:
+    image: wuihee/trial-search-backend:latest
     build:
       context: ./backend
       dockerfile: Dockerfile
@@ -9,6 +10,7 @@ services:
       - chromadb
 
   frontend:
+    image: wuihee/trial-search-frontend:latest
     build:
       context: ./frontend
       dockerfile: Dockerfile
