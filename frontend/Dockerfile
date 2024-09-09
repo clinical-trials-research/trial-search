@@ -4,8 +4,10 @@ RUN mkdir -p /app/node_modules && chown -R node:node /app
 
 WORKDIR /app
 
-COPY package*.json ./
-RUN npm install
+USER node
+
+COPY --chown=node:node package*.json ./
+RUN npm ci
 
 COPY . .
 RUN npm run build
