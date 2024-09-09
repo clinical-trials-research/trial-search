@@ -40,8 +40,7 @@ def get_studies_generator(num_studies=1000) -> Generator:
 
 
 if __name__ == "__main__":
-    time.sleep(5)
-    chroma_client = chromadb.HttpClient(host="chromadb", port=8000)
+    chroma_client = chromadb.HttpClient(host="host.docker.internal", port=8000)
     chroma_collection = chroma_client.get_or_create_collection(
         name="trials",
         embedding_function=SentenceTransformerEmbeddingFunction(
@@ -61,4 +60,4 @@ if __name__ == "__main__":
                     study["protocolSection"]["descriptionModule"]["briefSummary"]
                 )
             chroma_collection.add(ids=ids, documents=documents)
-        print("Finished updating ChromaDB!")
+    print("Finished updating ChromaDB!")
