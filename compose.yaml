@@ -1,4 +1,11 @@
 services:
+  chromadb:
+    image: chromadb/chroma
+    volumes:
+      - chroma-data:/chroma/chroma
+    ports:
+      - 8000:8000
+
   backend:
     build:
       context: ./backend
@@ -14,13 +21,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - 80:80
-
-  chromadb:
-    image: chromadb/chroma
-    volumes:
-      - chroma-data:/chroma/chroma
-    ports:
-      - 8000:8000
+    depends_on:
+      - backend
 
 volumes:
   chroma-data:
