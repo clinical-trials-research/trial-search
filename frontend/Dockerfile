@@ -1,12 +1,13 @@
 FROM node:22-alpine AS builder
 
-RUN mkdir -p /app/node_modules && chown -R node:node /app
-
 WORKDIR /app
+
+COPY package.json package-lock.json ./
+
+RUN npm install
 
 COPY . .
 
-RUN npm install
 RUN npm run build
 
 FROM nginx:1.27.1-alpine 
