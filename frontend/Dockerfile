@@ -1,11 +1,11 @@
 FROM node:22-alpine AS builder
 
+RUN mkdir -p /app/node_modules && chown -R node:node /app
+
 WORKDIR /app
 
-COPY package.json ./
+COPY package*.json ./
 RUN npm install
-
-ENV NODE_ENV=production
 
 COPY . .
 RUN npm run build
