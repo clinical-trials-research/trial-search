@@ -74,20 +74,22 @@ chroma_collection = chroma_client.get_or_create_collection(
 
 
 # Update database if it's empty.
-num_studies = get_num_studies()
-studies_generator = get_studies_generator()
-for batch in tqdm(studies_generator, total=num_studies // 1000):
-    ids = []
-    documents = []
-    for study in batch:
-        try:
-            ids.append(study["protocolSection"]["identificationModule"]["nctId"])
-            documents.append(
-                study["protocolSection"]["descriptionModule"]["briefSummary"]
-            )
-        except KeyError:
-            continue
-print("Finished updating ChromaDB!")
+if chroma_collection.count() == 0:
+    num_studies = get_num_studies()
+    studies_generator = get_studies_generator()
+    for batch in tqdm(studies_generator, total=num_studies // 1000):
+        ids = []
+        documents = []
+        for study in batch:
+            try:
+                documents.append(
+                    study["protocolSection"]["descriptionModule"]["briefSummary"]
+                )
+                ids.append(study["protocolSection"]["identificationModule"]["nctId"])
+            except KeyError:
+                continue
+        chroma_collection.add(ids=ids, documents=documents)
+    print("Finished updating ChromaDB!")
 
 
 @app.route("/api/query", methods=["POST"])
