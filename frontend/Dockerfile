@@ -14,6 +14,9 @@ FROM nginx:1.27.1-alpine
 
 COPY --from=builder /app/dist /usr/share/nginx/html
 
+COPY ./ssl/trialsearch.xyz.crt /etc/ssl
+COPY ./ssl/trialsearch.xyz.key /etc/ssl
+
 COPY nginx.conf /etc/nginx
 
 EXPOSE 80
