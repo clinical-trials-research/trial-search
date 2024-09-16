@@ -18,9 +18,10 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     volumes:
-      - ssl:/etc/ssl/trialsearch
+      - ssl:/etc/ssl
     ports:
       - 80:80
+      - 443:443
 
 volumes:
   chroma-data:
