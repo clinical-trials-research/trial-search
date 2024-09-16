@@ -17,8 +17,11 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+    volumes:
+      - ssl:/etc/ssl/trialsearch
     ports:
       - 80:80
 
 volumes:
   chroma-data:
+  ssl:
