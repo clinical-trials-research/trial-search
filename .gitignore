@@ -187,3 +187,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Keys
+*.crt
+*.key
