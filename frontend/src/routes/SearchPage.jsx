@@ -11,12 +11,7 @@ export default function SearchPage() {
 
   async function handleSearch(query, neighbors) {
     setLoading(true);
-    // let response = await fetch("/api/query", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify({ query, neighbors }),
-    // });
-    let response = await fetch("http://localhost:8001/api/query", {
+    let response = await fetch("/api/query", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ query, neighbors }),
