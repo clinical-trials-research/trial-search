@@ -6,7 +6,6 @@ import AboutPage from "./routes/AboutPage.jsx";
 import ErrorPage from "./routes/ErrorPage.jsx";
 import HomePage from "./routes/HomePage.jsx";
 import SearchPage from "./routes/SearchPage.jsx";
-import TrialPage, { loader as trialPageLoader } from "./routes/TrialPage.jsx";
 
 let router = createBrowserRouter([
   {
@@ -21,11 +20,6 @@ let router = createBrowserRouter([
       {
         path: "/about",
         element: <AboutPage />,
-      },
-      {
-        path: "/trial/:nctid",
-        element: <TrialPage />,
-        loader: trialPageLoader,
       },
     ],
   },
