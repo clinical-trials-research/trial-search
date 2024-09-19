@@ -12,7 +12,7 @@ export default function Trial({ nctid, document, distance }) {
       <div className="flex flex-row-reverse">
         <a href={`https://clinicaltrials.gov/study/${nctid}`} target="_blank">
           <img
-            className="w-5"
+            className="w-4"
             src="./src/assets/link-icon.png"
             alt="Link Icon"
           />
