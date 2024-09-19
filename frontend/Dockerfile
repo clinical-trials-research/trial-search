@@ -8,17 +8,21 @@ RUN npm install
 
 COPY . .
 
-RUN npm run build
+EXPOSE 5173
 
-FROM nginx:1.27.1-alpine 
+CMD ["npm", "run", "dev"]
 
-COPY --from=builder /app/dist /usr/share/nginx/html
+# RUN npm run build
 
-COPY ./ssl/trialsearch.xyz.crt /etc/ssl
-COPY ./ssl/trialsearch.xyz.key /etc/ssl
+# FROM nginx:1.27.1-alpine 
 
-COPY nginx.conf /etc/nginx
+# COPY --from=builder /app/dist /usr/share/nginx/html
 
-EXPOSE 80
+# COPY ./ssl/trialsearch.xyz.crt /etc/ssl
+# COPY ./ssl/trialsearch.xyz.key /etc/ssl
 
-CMD ["nginx", "-g", "daemon off;"]
+# COPY nginx.conf /etc/nginx
+
+# EXPOSE 80
+
+# CMD ["nginx", "-g", "daemon off;"]
