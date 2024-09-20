@@ -1,3 +1,5 @@
+import linkIconUrl from "../assets/link-icon.png";
+
 /**
  * Trial component visualizes a clinical trial document.
  */
@@ -11,11 +13,7 @@ export default function Trial({ nctid, document, distance }) {
       <p>{document}</p>
       <div className="flex flex-row-reverse">
         <a href={`https://clinicaltrials.gov/study/${nctid}`} target="_blank">
-          <img
-            className="w-4"
-            src="./src/assets/link-icon.png"
-            alt="Link Icon"
-          />
+          <img className="w-4" src={linkIconUrl} alt="Link Icon" />
         </a>
       </div>
     </div>
