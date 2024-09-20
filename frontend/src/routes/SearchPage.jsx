@@ -40,7 +40,6 @@ export default function SearchPage() {
   return (
     <div>
       <SearchBar handleSearch={handleSearch} />
-
       <div className="flex flex-col items-center">
         {loading && <p>Loading...</p>}
         {trials.map(({ nctid, document, distance }, index) => (
