@@ -11,7 +11,7 @@ services:
     ports:
       - 8001:8001
 
-  frontend:
+  frontend-dev:
     build:
       context: ./frontend
       dockerfile: Dockerfile.dev
