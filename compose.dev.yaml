@@ -1,13 +1,8 @@
 services:
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
+  chromadb:
+    image: chromadb/chroma
     volumes:
-      - ./frontend:/app
-      - /app/node_modules
-    ports:
-      - 5173:5173
+      - chroma-data:/chroma/chroma
 
   backend:
     build:
@@ -16,10 +11,19 @@ services:
     ports:
       - 8001:8001
 
-  chromadb:
-    image: chromadb/chroma
-    volumes:
-      - chroma-data:/chroma/chroma
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    ports:
+      - 5173:5173
+    develop:
+      watch:
+        - action: sync
+          path: ./frontend/src
+          target: /app/src
+          ignore:
+            - node_modules
 
 volumes:
   chroma-data:
