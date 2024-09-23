@@ -8,7 +8,7 @@ export default function Trial({ nctid, document, distance }) {
     <div className="my-2 w-11/12 rounded-3xl bg-gray-50 p-5 md:w-9/12 lg:w-7/12">
       <div className="flex justify-between">
         <p className="inline font-bold">{nctid}</p>
-        <p className="inline font-bold">{Math.round(distance)}</p>
+        <p className="inline font-bold">{parseFloat(distance).toFixed(2)}</p>
       </div>
       <p>{document}</p>
       <div className="flex flex-row-reverse">
