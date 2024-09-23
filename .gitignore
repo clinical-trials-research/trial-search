@@ -191,3 +191,6 @@ dist-ssr
 # Keys
 *.crt
 *.key
+
+# Database
+database
