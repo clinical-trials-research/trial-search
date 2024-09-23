@@ -2,7 +2,7 @@ services:
   chromadb:
     image: chromadb/chroma
     volumes:
-      - chroma-data:/chroma/chroma
+      - ./database:/chroma/chroma
 
   backend:
     build:
@@ -24,6 +24,3 @@ services:
           target: /app/src
           ignore:
             - node_modules
-
-volumes:
-  chroma-data:
