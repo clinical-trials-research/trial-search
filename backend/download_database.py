@@ -10,7 +10,7 @@ STUDIES_API = "https://clinicaltrials.gov/api/v2/studies"
 STUDY_SIZES_API = "https://clinicaltrials.gov/api/v2/stats/size"
 
 # Create database directory if it doesn't exist.
-Path("./datbase").mkdir(exist_ok=True)
+Path("./database").mkdir(exist_ok=True)
 
 
 def get_num_studies() -> int:
@@ -38,7 +38,7 @@ def get_studies_generator(num_studies=1000) -> Generator:
     """
 
     # Only query for NCTId and BriefSummary fields.
-    params = {"pageSize": str(num_studies), "fields": "NCTId|BriefSummary"}
+    params = {"pageSize": str(num_studies)}
 
     with httpx.Client() as client:
         response = client.get(STUDIES_API, params=params)
@@ -55,53 +55,54 @@ def get_studies_generator(num_studies=1000) -> Generator:
             next_page_token = data.get("nextPageToken")
 
 
-chroma_client = chromadb.PersistentClient(path="./database")
-chroma_collection = chroma_client.get_or_create_collection(
-    name="trials",
-    embedding_function=SentenceTransformerEmbeddingFunction(
-        model_name="neuml/pubmedbert-base-embeddings"
-    ),
-    metadata={"hnsw:space": "cosine"},
-)
+if __name__ == "__main__":
+    chroma_client = chromadb.PersistentClient(path="./database")
+    chroma_collection = chroma_client.get_or_create_collection(
+        name="trials",
+        embedding_function=SentenceTransformerEmbeddingFunction(
+            model_name="neuml/pubmedbert-base-embeddings"
+        ),
+        metadata={"hnsw:space": "cosine"},
+    )
 
-num_studies = get_num_studies()
-studies_generator = get_studies_generator()
-for batch in tqdm(studies_generator, total=num_studies // 1000):
-    ids = []
-    documents = []
-    metadatas = []
+    num_studies = get_num_studies()
+    studies_generator = get_studies_generator()
+    for batch in tqdm(studies_generator, total=num_studies // 1000):
+        ids = []
+        documents = []
+        metadatas = []
 
-    for study in batch:
-        protocol_section = study["protocolSection"]
-        nctid = protocol_section["identificationModule"]["nctId"]
-        brief_title = protocol_section["identificationModule"].get("briefTitle", "")
-        official_title = protocol_section["identificationModule"].get(
-            "officialTitle", ""
-        )
-        brief_summary = protocol_section.get("descriptionModule", {}).get(
-            "briefSummary", ""
-        )
-        detailed_description = protocol_section.get("descriptionModule", {}).get(
-            "detailedDescription", ""
-        )
-        eligibility_criteria = protocol_section.get("eligibilityModule", {}).get(
-            "eligibilityCriteria", ""
-        )
+        for study in batch:
+            protocol_section = study["protocolSection"]
+            nctid = protocol_section["identificationModule"]["nctId"]
+            brief_title = protocol_section["identificationModule"].get("briefTitle", "")
+            official_title = protocol_section["identificationModule"].get(
+                "officialTitle", ""
+            )
+            brief_summary = protocol_section.get("descriptionModule", {}).get(
+                "briefSummary", ""
+            )
+            detailed_description = protocol_section.get("descriptionModule", {}).get(
+                "detailedDescription", ""
+            )
+            eligibility_criteria = protocol_section.get("eligibilityModule", {}).get(
+                "eligibilityCriteria", ""
+            )
 
-        ids.append(nctid)
-        documents.append(
-            f"{brief_title} {official_title} {brief_summary} {detailed_description}"
-        )
-        metadatas.append(
-            {
-                "brief_title": brief_title,
-                "official_title": official_title,
-                "brief_summary": brief_summary,
-                "detailed_description": detailed_description,
-                "eligibility_criteria": eligibility_criteria,
-            }
-        )
+            ids.append(nctid)
+            documents.append(
+                f"{brief_title} {official_title} {brief_summary} {detailed_description}"
+            )
+            metadatas.append(
+                {
+                    "brief_title": brief_title,
+                    "official_title": official_title,
+                    "brief_summary": brief_summary,
+                    "detailed_description": detailed_description,
+                    "eligibility_criteria": eligibility_criteria,
+                }
+            )
 
-    chroma_collection.add(ids=ids, documents=documents, metadatas=metadatas)
+        chroma_collection.add(ids=ids, documents=documents, metadatas=metadatas)
 
-print("Finished updating ChromaDB!")
+    print("Finished updating ChromaDB!")
