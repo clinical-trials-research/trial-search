@@ -16,19 +16,20 @@ export default function SearchPage() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ query, neighbors }),
     });
-    let { ids, documents, distances } = await response.json();
+    let data = await response.json();
+    let { ids, distances, metadatas } = data;
 
     // We only have 1 query result, but ChromaDB returns a list of results
     // for each query.
     ids = ids[0];
-    documents = documents[0];
     distances = distances[0];
+    metadatas = metadatas[0];
 
     let newTrials = [];
     for (let i = 0; i < ids.length; i++) {
       newTrials.push({
         nctid: ids[i],
-        document: documents[i],
+        metadata: metadatas[i],
         distance: distances[i],
       });
     }
@@ -42,11 +43,11 @@ export default function SearchPage() {
       <SearchBar handleSearch={handleSearch} />
       <div className="flex flex-col items-center">
         {loading && <p>Loading...</p>}
-        {trials.map(({ nctid, document, distance }, index) => (
+        {trials.map(({ nctid, metadata, distance }, index) => (
           <Trial
             key={index}
             nctid={nctid}
-            document={document}
+            metadata={metadata}
             distance={distance}
           />
         ))}
