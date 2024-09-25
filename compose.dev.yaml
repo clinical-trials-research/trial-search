@@ -3,6 +3,8 @@ services:
     image: chromadb/chroma
     volumes:
       - ./database:/chroma/chroma
+    ports:
+      - 8000:8000
 
   backend:
     build:
