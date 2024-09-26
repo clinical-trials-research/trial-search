@@ -2,7 +2,7 @@ services:
   chromadb:
     image: chromadb/chroma
     volumes:
-      - chroma-data:/chroma/chroma
+      - ./database:/chroma/chroma
 
   backend:
     build:
@@ -22,5 +22,4 @@ services:
       - 443:443
 
 volumes:
-  chroma-data:
   ssl:
