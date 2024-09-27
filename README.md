@@ -13,7 +13,7 @@ cd trial-search
 
 [Docker](https://www.docker.com/) is required to run this application.
 
-## Database Installation
+### Database Installation
 
 Install poetry:
 
@@ -35,7 +35,7 @@ Run `download_database.py`:
 poetry run python3 download_database.py
 ```
 
-## Running the Application
+### Running the Application
 
 To run a development environment accessible at <http://localhost:5173>:
 
