@@ -32,7 +32,7 @@ export default function Trial({ nctid, metadata, distance }) {
         style={{
           maxHeight: expanded ? `${contentRef.current.scrollHeight}px` : "0px",
         }}
-        className="transition-max-height overflow-hidden duration-500"
+        className="overflow-hidden transition-all duration-500"
       >
         <h2 className="mt-2 font-bold">Official Title</h2>
         <p>{officialTitle}</p>
