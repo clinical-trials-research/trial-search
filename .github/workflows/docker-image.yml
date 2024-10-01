@@ -34,4 +34,4 @@ jobs:
           platforms: linux/amd64,linux/arm64
           context: "{{defaultContext}}:backend"
           push: true
-          tags: user/app:latest
+          tags: ${{ vars.DOCKERHUB_USERNAME }}/:latest
