@@ -5,14 +5,10 @@ services:
       - ./database:/chroma/chroma
 
   backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
+    image: wuihee/trial-search-backend:latest
 
   frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile.prod
+    image: wuihee/trial-search-frontend:latest
     volumes:
       - ./ssl:/etc/ssl
     ports:
