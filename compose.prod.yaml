@@ -8,18 +8,13 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    ports:
-      - 8001:8001
 
   frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile.prod
     volumes:
-      - ssl:/etc/ssl
+      - ./ssl:/etc/ssl
     ports:
       - 80:80
       - 443:443
-
-volumes:
-  ssl:
