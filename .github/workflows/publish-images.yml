@@ -29,7 +29,7 @@ jobs:
         with:
           platforms: linux/amd64,linux/arm64
           context: ./frontend
-          file: Dockerfile.prod
+          file: ./frontend/Dockerfile.prod
           push: true
           tags: ${{ steps.frontend-meta.outputs.tags }}
           labels: ${{ steps.frontend-meta.outputs.labels }}
