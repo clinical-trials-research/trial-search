@@ -19,7 +19,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ghcr.io/trial-search
+          images: ghcr.io/${{ github.repository }}
 
       - name: Build and Push Frontend
         uses: docker/build-push-action@v6
