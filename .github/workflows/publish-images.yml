@@ -25,7 +25,7 @@ jobs:
           context: ./frontend
           file: ./frontend/Dockerfile.prod
           push: true
-          labels: ghcr.io/${{ github.repository }}/trial-search-frontend:prod
+          tags: ghcr.io/${{ github.repository }}/trial-search-frontend:prod
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
@@ -35,6 +35,6 @@ jobs:
           platforms: linux/amd64,linux/arm64
           context: ./backend
           push: true
-          labels: ghcr.io/${{ github.repository }}/trial-search-backend:prod
+          tags: ghcr.io/${{ github.repository }}/trial-search-backend:prod
           cache-from: type=gha
           cache-to: type=gha,mode=max
