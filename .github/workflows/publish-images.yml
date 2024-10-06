@@ -1,10 +1,6 @@
 name: Publish Images
 on: [workflow_dispatch]
 
-permissions:
-  actions: write
-  packages: write
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -20,7 +16,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ secrets.GH_PASSWORD }}
 
       - name: Build and Push Frontend
         uses: docker/build-push-action@v6
